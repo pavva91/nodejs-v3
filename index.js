@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 // console.log('hello world')
 // console.log(global)
 console.log(process.argv)
