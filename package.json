@@ -6,6 +6,7 @@
   "description": "## Execute JS program",
   "version": "1.0.0",
   "main": "index.js",
+  "type": "module",
   "bin": {
     "note-node-cli": "./index.js"
   },
