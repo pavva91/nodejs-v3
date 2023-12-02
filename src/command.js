@@ -5,8 +5,8 @@ yargs(hideBin(process.argv))
     .command(
         'new <note>',
         'Create a new note',
-        (yargsVar) =>
-            yargsVar.positional('note', {
+        (args) =>
+            args.positional('note', {
                 type: 'string',
                 description: 'The content of the note to create',
             }),
