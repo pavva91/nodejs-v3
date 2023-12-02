@@ -104,3 +104,36 @@ note-node-cli "note 1"
 ```bash
 node
 ```
+
+## Test (Jest)
+
+Install Module:
+
+```bash
+npm install --save-dev jest
+
+```
+
+Inside (./package.json) add:
+
+```json
+{
+    "scripts": {
+        "test": "jest"
+    }
+}
+```
+
+Run test command:
+
+```bash
+npm run test
+
+```
+
+Or:
+
+```bash
+npm test
+
+```
