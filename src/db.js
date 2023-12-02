@@ -15,6 +15,6 @@ export const saveDB = async (db) => {
 export const insertDB = async (note) => {
     const db = await getDB()
     db.notes.push(note)
-    await saveDB()
+    await saveDB(db)
     return db
 }
