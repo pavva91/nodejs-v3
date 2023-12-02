@@ -1,5 +1,14 @@
+/* eslint-disable import/extensions */
 import yargs from 'yargs'
 import { hideBin } from 'yargs/helpers'
+import {
+    createNote,
+    findNotes,
+    getAllNotes,
+    removeAllNotes,
+    removeNote,
+} from './notes.js'
+import { listNotes } from './utils.js'
 
 yargs(hideBin(process.argv))
     .command(
@@ -10,8 +19,10 @@ yargs(hideBin(process.argv))
                 type: 'string',
                 description: 'The content of the note to create',
             }),
-        (argv) => {
-            console.log(argv.note)
+        async (argv) => {
+            const tags = argv.tags ? argv.tags.split(',') : []
+            const note = await createNote(argv.note, tags)
+            console.log('New note added!', note)
         }
     )
     .option('tags', {
@@ -23,7 +34,10 @@ yargs(hideBin(process.argv))
         'all',
         'get all notes',
         () => {},
-        async () => {}
+        async () => {
+            const notes = await getAllNotes()
+            listNotes(notes)
+        }
     )
     .command(
         'find <filter>',
@@ -34,7 +48,10 @@ yargs(hideBin(process.argv))
                     'The search term to filter notes by, will be applied to note.content',
                 type: 'string',
             }),
-        async () => {}
+        async (argv) => {
+            const matches = await findNotes(argv.filter)
+            listNotes(matches)
+        }
     )
     .command(
         'remove <id>',
@@ -44,7 +61,10 @@ yargs(hideBin(process.argv))
                 type: 'number',
                 description: 'The id of the note you want to remove',
             }),
-        async () => {}
+        async (argv) => {
+            const id = await removeNote(argv.id)
+            console.log(id)
+        }
     )
     .command(
         'web [port]',
@@ -61,7 +81,11 @@ yargs(hideBin(process.argv))
         'clean',
         'remove all notes',
         () => {},
-        async () => {}
+        async () => {
+            const db = await removeAllNotes()
+            console.log(db)
+            console.log('DB resetted')
+        }
     )
     .demandCommand(1)
     .parse()

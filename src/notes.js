@@ -1,4 +1,5 @@
-import { insertDB, saveDB, getDB } from './db'
+// eslint-disable-next-line import/extensions
+import { insertDB, saveDB, getDB } from './db.js'
 
 export const createNote = async (note, tags) => {
     const newNote = {
