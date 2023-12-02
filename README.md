@@ -111,6 +111,36 @@ Install Module:
 
 ```bash
 npm install --save-dev jest
+```
+
+Get Jest Globals (mocks)
+
+```bash
+npm install --save-dev @jest/globals
+```
+
+Inside (./package.json) add (because we are using modules we have to do that):
+
+```json
+{
+    "scripts": {
+        "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+        "testWithModules": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
+    }
+}
+```
+
+Run test command:
+
+```bash
+npm test
+
+```
+
+Run test command:
+
+```bash
+npm run testWithModules
 
 ```
 
@@ -119,7 +149,7 @@ Inside (./package.json) add:
 ```json
 {
     "scripts": {
-        "test": "jest"
+        "testWithoutModules": "jest"
     }
 }
 ```
@@ -127,7 +157,7 @@ Inside (./package.json) add:
 Run test command:
 
 ```bash
-npm run test
+npm run testWithoutModules
 
 ```
 
