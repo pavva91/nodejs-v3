@@ -1,6 +1,53 @@
-const add = (num, num2) => num + num2
+/* eslint-disable import/extensions */
+import { beforeEach, describe, expect, jest } from '@jest/globals'
 
-test('add takes two numbers and returns a sum', () => {
-    const result = add(1, 2)
-    expect(result).toBe(3)
+jest.unstable_mockModule('../src/db.js', () => ({
+    insertDB: jest.fn(),
+    getDB: jest.fn(),
+    saveDB: jest.fn(),
+}))
+
+const { insertDB, getDB, saveDB } = await import('../src/db.js')
+const { createNote, getAllNotes, removeNote } = await import('../src/notes.js')
+
+beforeEach(() => {
+    insertDB.mockClear()
+    getDB.mockClear()
+    saveDB.mockClear()
+})
+
+describe('cli app', () => {
+    test('createNote inserts data and returns it', async () => {
+        const note = {
+            content: 'New note',
+            id: 1,
+            tags: ['tag1'],
+        }
+        insertDB.mockResolvedValue(note)
+        const result = await createNote(note.content, note.tags)
+        expect(result.content).toEqual(note.content)
+        expect(result.tags).toEqual(note.tags)
+    })
+
+    test('getAllNotes returns all notes', async () => {
+        const db = {
+            notes: ['note1', 'note2', 'note3'],
+        }
+        getDB.mockResolvedValue(db)
+        const result = await getAllNotes()
+        expect(result).toEqual(db.notes)
+    })
+
+    test('removeNote does nothing if id is not found', async () => {
+        const notes = [
+            { id: 1, content: 'note 1' },
+            { id: 2, content: 'note 2' },
+            { id: 3, content: 'note 3' },
+        ]
+        saveDB.mockResolvedValue(notes)
+
+        const idToRemove = 4
+        const result = await removeNote(idToRemove)
+        expect(result).toEqual(-1)
+    })
 })
