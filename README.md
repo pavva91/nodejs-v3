@@ -5,16 +5,26 @@
 Use Prettier for formatting and linters for catching bugs!
 Install both prettier, eslint and eslint-config-prettier:
 
+### NOTE: For The editor use the Daemons
+
+```bash
+npm i -D @fsouza/prettierd eslint_d
+```
+
 ```bash
 npm i --save-dev prettier eslint eslint-config-prettier
+```
 
+Is the same as:
+
+```bash
+npm i -D prettier eslint eslint-config-prettier
 ```
 
 Create ESLint config file:
 
 ```bash
 npm init @eslint/config
-
 ```
 
 Modify Prettier config file accordingly:
@@ -46,7 +56,6 @@ Then install dependencies:
 
 ```bash
 npm i --save-dev prettier
-
 ```
 
 Check which files will be modified by prettier (from project root):
@@ -60,8 +69,6 @@ Format all files in src:
 
 ```bash
 prettier src --write
-
-
 ```
 
 ## Use ESLint
@@ -75,7 +82,6 @@ Run eslint on src folder:
 
 ```bash
 npx eslint src
-
 ```
 
 Run eslint on index.js file:
@@ -89,14 +95,12 @@ npx eslint index.js
 
 ```bash
 node index.js
-
 ```
 
 ## Execute JS CLI
 
 ```bash
 note-node-cli "note 1"
-
 ```
 
 ## Enter Node REPL
