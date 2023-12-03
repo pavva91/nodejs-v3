@@ -165,5 +165,12 @@ Or:
 
 ```bash
 npm test
+```
 
+## Vanilla Server
+
+Utility to automatically open the browser from the CLI:
+
+```bash
+npm i open
 ```
